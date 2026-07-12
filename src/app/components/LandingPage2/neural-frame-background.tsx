@@ -20,6 +20,21 @@ function framePath(n: number) {
  * Drop the 34 source images into /public/images/neural-frames/ named
  * frame-001.jpg through frame-034.jpg (see the .txt placeholder in that
  * folder for the exact naming convention).
+ *
+ * IMPORTANT: this is a HERO-ONLY background. Render it as the first child
+ * of a `position: relative` hero <section> (not as a page-level sibling) —
+ * it positions itself with `absolute` so it is clipped to that section's
+ * height. It previously used `position: fixed`, which pinned the frame
+ * behind the *entire* page, including sections with no opaque card
+ * background (mission strip, FAQ, testimonial/platform headers). Those
+ * sections use theme-aware text color (var(--mkt-text)), which correctly
+ * turns dark in light mode — but a permanently-dark image behind them
+ * made that dark text unreadable. Scoping the image to the hero section
+ * only fixes that: everywhere else now shows the normal theme background,
+ * so text stays legible in both light and dark mode. The hero itself
+ * still forces light-colored text (see the override at the bottom of
+ * landing-v2-layout.tsx) since this image is always dark regardless of
+ * site theme.
  */
 export function NeuralFrameBackground() {
   const [frame, setFrame] = useState(1);
@@ -50,7 +65,7 @@ export function NeuralFrameBackground() {
     <div
       aria-hidden="true"
       style={{
-        position: "fixed",
+        position: "absolute",
         inset: 0,
         zIndex: -2,
         overflow: "hidden",

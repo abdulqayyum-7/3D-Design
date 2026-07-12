@@ -1835,15 +1835,19 @@ export const LANDING_V2_CSS = `
   }
 
   /* The neural-frame hero background is always a dark photographic image,
-     regardless of site light/dark mode — so hero text must stay light-colored
-     unconditionally here, rather than following --mkt-text (which correctly
-     turns dark in light mode elsewhere, but would be invisible against this
-     always-dark backdrop). */
+     regardless of site light/dark mode — so hero text that sits DIRECTLY
+     on that image (no card/pill behind it) must stay light-colored
+     unconditionally, rather than following --mkt-text (which correctly
+     turns dark in light mode elsewhere, but would be invisible against
+     this always-dark backdrop).
+     NOTE: .lp-hero-punchline is deliberately excluded from this list — those
+     pills have their own opaque, theme-aware background
+     (var(--mkt-bg-elevated), e.g. white in light mode), so they should keep
+     following --mkt-text normally. Forcing them light too made the text
+     invisible against their own white background in light mode. */
   .medprep-landing-v2 .lp-hero .lp-hero-title,
   .medprep-landing-v2 .lp-hero .lp-hero-subtitle,
-  .medprep-landing-v2 .lp-hero .lp-hero-kicker,
-  .medprep-landing-v2 .lp-hero .lp-hero-punchline,
-  .medprep-landing-v2 .lp-hero .lp-hero-punchline-dot {
+  .medprep-landing-v2 .lp-hero .lp-hero-kicker {
     color: #f5f3ff;
   }
   .medprep-landing-v2 .lp-hero .lp-hero-subtitle strong {

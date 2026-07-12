@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
 import { LandingImageLightbox } from "./landing-v2-image-lightbox";
 
 export function ProgramIcon({ name, size = 18 }: { name: string; size?: number }) {
@@ -68,12 +68,14 @@ export function ProgramBtn({
   children,
   onClick,
   fullWidth,
+  style,
 }: {
   variant?: "primary" | "ghost";
   size?: "md" | "lg";
   children: ReactNode;
   onClick?: () => void;
   fullWidth?: boolean;
+  style?: CSSProperties;
 }) {
   const [hovered, setHovered] = useState(false);
   const isPrimary = variant === "primary";
@@ -105,6 +107,7 @@ export function ProgramBtn({
         fontFamily: "inherit",
         width: fullWidth ? "100%" : "auto",
         transition: "all .18s ease",
+        ...style,
       }}
     >
       {children}

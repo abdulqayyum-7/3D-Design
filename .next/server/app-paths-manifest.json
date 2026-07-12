@@ -1,6 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/landing-page/page": "app/landing-page/page.js",
-  "/landing-page/fcps/page": "app/landing-page/fcps/page.js",
-  "/landing-page/jcat/page": "app/landing-page/jcat/page.js"
+  "/landing-page/fcps/page": "app/landing-page/fcps/page.js"
 }

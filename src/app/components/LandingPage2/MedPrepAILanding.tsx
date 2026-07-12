@@ -419,10 +419,13 @@ export function MedPrepAILanding({ actions }: { actions: MedPrepLandingActions }
 
   return (
     <LandingV2Chrome activePage="home" actions={actions}>
-      <NeuralFrameBackground />
       <PremiumFX />
       {/* ── HERO ── */}
       <section id="home" className="lp-hero" style={{ position: "relative" }}>
+        {/* Hero-only cinematic background — scoped to this section (not the
+            whole page) so sections further down use the normal theme
+            background and stay readable in both light and dark mode. */}
+        <NeuralFrameBackground />
         {/* Subtle violet vignette behind the hero copy */}
         <div
           style={{
@@ -443,10 +446,10 @@ export function MedPrepAILanding({ actions }: { actions: MedPrepLandingActions }
           className="lp-hero-heart-visual"
           style={{
             position: "absolute",
-            top: "-36%",
-            right: "-17%",
-            width: 800,
-            height: 800,
+            top: "-32%",
+            right: "-16%",
+            width: 770,
+            height: 770,
             zIndex: 5,
             maskImage: "radial-gradient(circle at 55% 45%, black 55%, transparent 82%)",
             WebkitMaskImage: "radial-gradient(circle at 55% 45%, black 55%, transparent 82%)",
@@ -477,7 +480,12 @@ export function MedPrepAILanding({ actions }: { actions: MedPrepLandingActions }
                 <Btn variant="gold" size="lg" onClick={actions.onStartTrial}>
                   Dashboard
                 </Btn>
-                <Btn variant="ghost" size="lg" onClick={() => scrollTo("how-it-works")}>
+                <Btn
+                  variant="ghost"
+                  size="lg"
+                  onClick={() => scrollTo("how-it-works")}
+                  style={{ color: "#f5f3ff", borderColor: "rgba(245,243,255,0.35)" }}
+                >
                   See How It Works
                 </Btn>
               </div>

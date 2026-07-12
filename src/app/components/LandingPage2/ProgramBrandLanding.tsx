@@ -101,7 +101,6 @@ export function ProgramBrandLanding({
       footerBottomNote="Trusted for FCPS-1 & JCAT Preparation · Pakistan"
     >
       <div className="lp-program">
-        <NeuralFrameBackground />
         <PremiumFX />
         {demoOpen && (
           <DemoModal
@@ -111,21 +110,36 @@ export function ProgramBrandLanding({
           />
         )}
 
-        <section className="section" style={{ paddingBottom: 24 }}>
-          <div className="wrap">
-            <span className="eyebrow-pill">
+        <section className="section" style={{ paddingBottom: 24, position: "relative" }}>
+          {/* Hero-only cinematic background — scoped to this section (not
+              the whole page) so sections further down use the normal
+              theme background and stay readable in both light and dark
+              mode. */}
+          <NeuralFrameBackground />
+          <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
+            {/* This hero always sits on the dark neural-frame image (see
+                NeuralFrameBackground above), regardless of site light/dark
+                theme, so its text is pinned to fixed light colors here
+                instead of the theme-following var(--mkt-text) tokens —
+                same reasoning as the home page hero override. */}
+            <span className="eyebrow-pill" style={{ color: "#f5f3ff" }}>
               <span className="eyebrow-dot" />
               {p.badge} · Medicine & Allied
             </span>
             <div className="split" style={{ alignItems: "center" }}>
               <div>
-                <h1 style={{ fontSize: "2.6rem", lineHeight: 1.1, marginBottom: 18, fontFamily: "Georgia, serif" }}>{pageTitle}</h1>
-                <p style={{ color: "var(--mkt-text-muted)", marginBottom: 28, lineHeight: 1.7 }}>{p.heroSubtitle}</p>
+                <h1 style={{ fontSize: "2.6rem", lineHeight: 1.1, marginBottom: 18, fontFamily: "Georgia, serif", color: "#f5f3ff" }}>{pageTitle}</h1>
+                <p style={{ color: "rgba(245,243,255,0.82)", marginBottom: 28, lineHeight: 1.7 }}>{p.heroSubtitle}</p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   <ProgramBtn size="lg" onClick={actions.onBeginPrep}>
                     {beginLabel}
                   </ProgramBtn>
-                  <ProgramBtn variant="ghost" size="lg" onClick={() => setDemoOpen(true)}>
+                  <ProgramBtn
+                    variant="ghost"
+                    size="lg"
+                    onClick={() => setDemoOpen(true)}
+                    style={{ color: "#f5f3ff", borderColor: "rgba(245,243,255,0.35)" }}
+                  >
                     View Sample Questions
                   </ProgramBtn>
                 </div>
