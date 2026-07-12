@@ -1,0 +1,275 @@
+/* Theme CSS Custom Properties */
+:root {
+  /* Default Blue Theme - will be overridden by ThemeService */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  /* RGB triplets for rgba(...) overlays (mirrors ThemeService hexToRgb defaults; overridden on applyTheme) */
+  --color-primary-400-rgb: 96, 165, 250;
+  --color-primary-500-rgb: 59, 130, 246;
+
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-200: #e2e8f0;
+  --color-secondary-300: #cbd5e1;
+  --color-secondary-400: #94a3b8;
+  --color-secondary-500: #64748b;
+  --color-secondary-600: #475569;
+  --color-secondary-700: #334155;
+  --color-secondary-800: #1e293b;
+  --color-secondary-900: #0f172a;
+
+  /* Base font size and border radius */
+  --base-font-size: 14px;
+  --base-border-radius: 0.5rem;
+
+  /* Elevation system for hover/active effects */
+  --elevate-1: rgba(0, 0, 0, 0.03);
+  --elevate-2: rgba(0, 0, 0, 0.08);
+
+  /* Light mode semantic colors */
+  --card-bg: white;
+  --background-bg: #f9fafb;
+  --foreground-color: #111827;
+  --muted-bg: #f3f4f6;
+  --muted-foreground-color: #6b7280;
+  /* App shell semantic colors (overridden by ThemeService.applyTheme) */
+  --app-bg: #f4f4f5;
+  --app-surface: #ffffff;
+  --app-elevated: #fafafa;
+  --app-text: #18181b;
+  --app-muted: #71717a;
+  --app-border: #e4e4e7;
+
+  /* Marketing / landing aliases (same palette — set by ThemeService) */
+  --mkt-bg: var(--app-bg);
+  --mkt-bg-elevated: var(--app-surface);
+  --mkt-text: var(--app-text);
+  --mkt-text-muted: var(--app-muted);
+  --mkt-border: var(--app-border);
+  --mkt-accent: var(--color-primary-600);
+  --mkt-accent-hover: var(--color-primary-700);
+  --mkt-accent-muted: var(--color-primary-500);
+}
+
+/* Dark mode - colors will be dynamically set by ThemeService */
+.dark {
+  /* Dark mode colors are now set dynamically by ThemeService.applyTheme() */
+  --card-bg: #1f2937;
+  --background-bg: #111827;
+  --foreground-color: #f3f4f6;
+  --muted-bg: #1f2937;
+  --muted-foreground-color: #9ca3af;
+  --border-color: #374151;
+}
+
+/* Apply base font size to html element */
+html {
+  font-size: var(--base-font-size);
+}
+
+/* Global text — follows app semantic tokens */
+body {
+  color: var(--app-text, #18181b);
+  background: var(--app-bg, #f4f4f5);
+}
+
+.dark body {
+  color: var(--app-text, #fafafa);
+  background: var(--app-bg, #09090b);
+}
+
+/* Theme-aware utility classes */
+.theme-rounded {
+  border-radius: var(--base-border-radius);
+}
+
+.theme-rounded-sm {
+  border-radius: calc(var(--base-border-radius) * 0.5);
+}
+
+.theme-rounded-lg {
+  border-radius: calc(var(--base-border-radius) * 1.5);
+}
+
+.theme-rounded-xl {
+  border-radius: calc(var(--base-border-radius) * 2);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Light mode scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Elevation system for interactive elements */
+.hover-elevate,
+.active-elevate,
+.hover-elevate-2,
+.active-elevate-2 {
+  position: relative;
+  z-index: 0;
+}
+
+.hover-elevate::after,
+.active-elevate::after,
+.hover-elevate-2::after,
+.active-elevate-2::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.hover-elevate:hover::after,
+.active-elevate:active::after {
+  opacity: 1;
+  background-color: var(--elevate-1);
+}
+
+.hover-elevate-2:hover::after,
+.active-elevate-2:active::after {
+  opacity: 1;
+  background-color: var(--elevate-2);
+}
+
+/* If there's a border, adjust the inset */
+.border.hover-elevate::after,
+.border.active-elevate::after,
+.border.hover-elevate-2::after,
+.border.active-elevate-2::after {
+  inset: -1px;
+}
+
+/* Dark mode elevation adjustments */
+.dark {
+  --elevate-1: rgba(255, 255, 255, 0.04);
+  --elevate-2: rgba(255, 255, 255, 0.09);
+}
+
+/* ------------------------------------------------------------------ */
+/* Decorative blob / ambient animations used by mode pages            */
+/* ------------------------------------------------------------------ */
+@keyframes mp-float-slow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(20px, -30px, 0) scale(1.05);
+  }
+}
+
+@keyframes mp-float-slower {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-25px, 20px, 0) scale(1.08);
+  }
+}
+
+@keyframes mp-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate3d(15px, 18px, 0) scale(1.04);
+    opacity: 0.85;
+  }
+}
+
+@keyframes mp-pulse-glow {
+  0%, 100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes mp-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mp-float-slow {
+  animation: mp-float-slow 14s ease-in-out infinite;
+}
+.mp-float-slower {
+  animation: mp-float-slower 18s ease-in-out infinite;
+}
+.mp-drift {
+  animation: mp-drift 12s ease-in-out infinite;
+}
+.mp-pulse-glow {
+  animation: mp-pulse-glow 6s ease-in-out infinite;
+}
+.mp-fade-up {
+  animation: mp-fade-up 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mp-float-slow,
+  .mp-float-slower,
+  .mp-drift,
+  .mp-pulse-glow,
+  .mp-fade-up {
+    animation: none !important;
+  }
+}

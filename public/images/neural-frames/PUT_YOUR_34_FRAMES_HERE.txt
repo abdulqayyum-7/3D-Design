@@ -1,0 +1,16 @@
+Drop your 34 extracted frame images directly in this folder.
+
+Required filenames (zero-padded, 3 digits, .jpg):
+  frame-001.jpg
+  frame-002.jpg
+  frame-003.jpg
+  ...
+  frame-034.jpg
+
+If your frames are currently named something else (e.g. "frame_001.jpg" with an
+underscore, or start at frame_000), just rename them to match the pattern above
+— or tell Claude the exact names you have and the component's FRAME_COUNT /
+FRAME_PATTERN can be adjusted to match instead of renaming 34 files by hand.
+
+Delete this .txt file once your frames are in place (it's not referenced by
+any code, it's just here as a placeholder/instructions).
