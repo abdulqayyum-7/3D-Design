@@ -1730,10 +1730,12 @@ export const LANDING_V2_CSS = `
 
   /* Right-side 3D heart accent — no card/background, just the model itself,
      faded at the edges via mask so it blends into the hero rather than
-     reading as a hard rectangle. Shrinks and re-centers on smaller screens
-     so it never competes with or overlaps the (still centered) copy. */
+     reading as a hard rectangle. Shrinks and stays pinned to the right edge
+     on smaller screens (rather than drifting toward the center) and drops
+     behind the copy's z-index so it never competes with or obscures the
+     (centered) hero text. */
   .lp-hero-heart-visual {
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease, width 0.3s ease, height 0.3s ease;
   }
   @media (max-width: 1100px) {
     .lp-hero-heart-visual {
@@ -1745,11 +1747,22 @@ export const LANDING_V2_CSS = `
   }
   @media (max-width: 768px) {
     .lp-hero-heart-visual {
-      width: 330px !important;
-      height: 330px !important;
-      top: -7% !important;
-      right: -2% !important;
-      opacity: 0.8;
+      width: 260px !important;
+      height: 260px !important;
+      top: -3% !important;
+      right: -10% !important;
+      left: auto !important;
+      z-index: 0 !important;
+      opacity: 0.4;
+    }
+  }
+  @media (max-width: 480px) {
+    .lp-hero-heart-visual {
+      width: 190px !important;
+      height: 190px !important;
+      top: -1% !important;
+      right: -12% !important;
+      opacity: 0.32;
     }
   }
   @media (prefers-reduced-motion: reduce) {
